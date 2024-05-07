@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>글자 관련 태그</title>
+    </head>
+    <body>
+        <h3>Table 태그 ★★★★★</h3>
+        <div>웹 문서에서 table 형태로 자료를 정리하기 위해 사용되는 태그</div>
+        <div>행과 열로 구성되어 있으며, 만나는 지점을 셀이라 한다.</div>
+        <div>table 태그 : 테이블을 지칭하는 태그로 가장 밖에 선언된다.</div>
+        <div>tr 태그 : 한개의 행(row)을 나타내는 태그</div>
+        <div>td 태그 : 한개의 열을 나타내는 태그</div>
+
+        <h3>테이블 태그</h3>
+        <table>
+            <tr>
+                <td>이름</td>
+                <td>나이</td>
+            </tr>
+            <tr>
+                <td>홍길동</td>
+                <td>31</td>
+            </tr>
+            <tr>
+                <td>최길동</td>
+                <td>35</td>
+            </tr>
+        </table>
+
+        <hr><br>
+
+        <h3>border 속성 : 테이블의 테두리 굵기를 조절하는 속성, html4 문법으로 사용하면 안됨</h3>
+
+        <table border="1">
+            <tr>
+                <td>이름</td>
+                <td>나이</td>
+                <td>전화번호</td>
+            </tr>
+            <tr>
+                <td>홍길동</td>
+                <td>31</td>
+                <td>010-0000-7777</td>
+            </tr>
+            <tr>
+                <td>최길동</td>
+                <td>35</td>
+                <td>010-1111-2222</td>
+            </tr>
+        </table>
+
+        <hr><br>
+
+        <h3>caption 태그 : 테이블의 제목을 다는 태그</h3>
+
+        <table border="1">
+            <caption>회원 정보</caption>
+            <tr>
+                <td>이름</td>
+                <td>나이</td>
+                <td>전화번호</td>
+            </tr>
+            <tr>
+                <td>홍길동</td>
+                <td>31</td>
+                <td>010-0000-7777</td>
+            </tr>
+            <tr>
+                <td>최길동</td>
+                <td>35</td>
+                <td>010-1111-2222</td>
+            </tr>
+        </table>
+
+        <hr><br>
+
+        <h3>th 태그 : 테이블 제목 셀을 지정하는 태그</h3>
+        <div>볼드 처리 및 가운데 정렬됨</div>
+
+        <table border="1">
+            <caption>회원 정보</caption>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>전화번호</th>
+            </tr>
+            <tr>
+                <td>홍길동</td>
+                <td>31</td>
+                <td>010-0000-7777</td>
+            </tr>
+            <tr>
+                <td>최길동</td>
+                <td>35</td>
+                <td>010-1111-2222</td>
+            </tr>
+        </table>
+
+        <hr><br>
+
+        <h3>colspan : 열을 병합하는 속성(가로병합)</h3>
+        <table border="1">
+            <tr>
+                <td colspan="3">A1</td>
+                <!-- <td>A2</td>
+                <td>A3</td> -->
+            </tr>
+            <tr>
+                <td>B1</td>
+                <td>B2</td>
+                <td>B3</td>
+            </tr>
+        </table>
+
+        <hr><br>
+
+        <h3>rowspan : 행을 병합하는 속성(세로병합)</h3>
+        <table border="1">
+            <tr>
+                <td rowspan="3">A1</td>
+                <td>A2</td>
+                <td>A3</td>
+            </tr>
+            <tr>
+                <!-- <td>B1</td> -->
+                <td>B2</td>
+                <td>B3</td>
+            </tr>
+            <tr>
+                <!-- <td>C1</td> -->
+                <td>C2</td>
+                <td>C3</td>
+            </tr>
+        </table>
+        
+        <hr><br>
+
+        <h3>thead, tbody, tfoot : 테이블의 영역을 나누는 태그, 선언하지 않는 경우 tbody</h3>
+        <table border="1" style="width: 400px; height: 120px; text-align: center; border: 1px solid black;">
+            <thead>
+                <th style="height:50px; width:200px; border: 1px solid black; color:blue;">이름</th>
+                <th>나이</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>홍길동</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>최길동</td>
+                    <td>40</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">총 2명</td>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+</html>
