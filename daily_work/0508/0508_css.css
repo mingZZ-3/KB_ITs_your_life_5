@@ -1,0 +1,59 @@
+
+#login_layout{
+    background-color: #ffd900;
+    width: 500px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+#btn_login{
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+}
+
+#top_border{
+    width: 320px;
+    background-color: red;
+}
+
+.new_font{
+    font-family: "Hi Melody", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.green_back{
+    background-color: greenyellow;
+}
+
+.red_back{
+    background-color: red;
+    color: white;
+}
+
+.title{
+    color: #0073ff;
+}
+
+.td1{
+    width: 70px;
+    background-color: orange;
+    color: cornflowerblue;
+    text-align: center;
+    border: 1px solid black;
+    font-family: "Hi Melody", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14pt;
+}
+
+.td2{
+    background-color: greenyellow;
+    border: 1px solid black;
+}
+
+.inputText{
+    width: 200px;
+    background-color: gainsboro;
+}
