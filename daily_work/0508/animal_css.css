@@ -1,0 +1,21 @@
+a{
+    text-decoration: none;
+    color:black;
+}
+
+a:hover{
+    color: #569b56;
+}
+
+ul{
+    list-style: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 !important;
+}
+
+ul > li{
+    float: left;
+}

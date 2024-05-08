@@ -1,0 +1,47 @@
+a{
+    text-decoration: none;
+    color:red;
+}
+
+div > span:nth-child(even){
+    background-color: pink;
+    background-clip: border-box;
+}
+
+#menu{
+    width: 50%;
+    height: 40px;
+    background-color: orange;
+    list-style: none;
+    border-radius: 17px;
+    margin-left: 30px;
+    background-clip: content-box;
+}
+
+div > span{
+    float: left;
+    width: 25%;
+    height: 30px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#top_back{
+    height: 70px;
+    
+    background-color: greenyellow;
+    margin-top: 10px;
+}
+
+#cart{
+    width: 25%;
+    height: 70px;
+    background-color: black;
+    color: yellow;
+    font-size: 14pt;
+    border-end-end-radius: 70px;
+    border-top-left-radius: 70px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    float:right;
+}
