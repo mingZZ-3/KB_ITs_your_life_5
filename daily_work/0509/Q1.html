@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습1 - 반응형 웹 패턴</title>
+
+    <style>
+        body{
+            background-color: azure;
+        }
+        img{
+            width: 300px;
+            height: 200px;
+        }
+        #head{
+            height: 500px;
+            display: grid;
+            align-content: space-evenly;
+            grid-area: auto;
+            text-align: center;
+            row-gap: 30px;
+            justify-content: center;
+        }
+        #title{
+            width: 400px;
+            height: 70px;
+            font-size: 30pt;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid black;
+            color: hotpink;
+        }
+        
+        @media screen and (max-width:7960px) {
+            #title{
+                background-color: yellow;
+            }
+            #title::after{
+                content: '옐로우 CAT';
+            }
+        }
+        @media screen and (max-width:959px) {
+            #title{
+                background-color: black;
+            }
+            #title::after{
+                content: '블랙 CAT';
+            }
+        }
+        @media screen and (max-width:767px) {
+            #title{
+                background-color: greenyellow;
+            }
+            #title::after{
+                content: '그린 CAT';
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="head">
+        <div id="title">
+            나는&nbsp;
+        </div>
+        
+        <div id="image">
+            <img src="resource/cat.jpeg">
+        </div>
+    </div>
+</body>
+</html>

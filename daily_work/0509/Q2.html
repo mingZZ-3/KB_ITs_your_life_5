@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습2 - flex</title>
+
+    <style>
+        body{
+            display: flex;
+            column-gap: 10px;
+            background-color: pink;
+            justify-content: center;
+            padding: 100px 0px;
+        }
+        img{
+            height: 300px;
+            
+        }
+        .container{
+            text-align: center;
+        }
+        .text{
+            font-weight: bold;
+            font-size: 17pt;
+            margin-bottom: 10px;
+        }
+        #img1, #img3{
+            flex-grow: 1;
+        }
+        #img2{
+            flex-grow: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="img1">
+        <div class="text">우아하게!</div>
+        <div><img src="resource/ooh_cat.jpeg"></div>
+    </div>
+    <div class="container" id="img2">
+        <div class="text">달려보자고!</div>
+        <div><img src="resource/speed_cat.jpeg"></div>
+    </div>
+    <div class="container" id="img3">
+        <div class="text">스피디하게!</div>
+        <div><img src="resource/run_cat.jpeg"></div>
+    </div>
+</body>
+</html>
