@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>Q1.별 찍기</h3>
+    <h3>Q1. 별 찍기</h3>
     <div id="q1"></div>
     <script>
         const star = '*';
@@ -18,7 +18,7 @@
     </script>
     <br>
 
-    <h3>Q2.입력 받고 그리기</h3>
+    <h3>Q2. 입력 받고 그리기</h3>
     원하는 기호를 넣으세요>> <input type="text" id="inputValue1"><br>
     원하는 획수를 넣으세요>> <input type="text" id="inputValue2"><br>
     <button onclick="drawSomething()">확인</button>
@@ -27,36 +27,67 @@
         function drawSomething() {
             let val1 = document.getElementById('inputValue1').value;
         let val2 = document.getElementById('inputValue2').value;
-        let sum = ''
+        let sum1 = ''
         for (let i = 0;i < Number(val2);i++) {
-            sum += val1;
+            sum1 += val1;
         }
-        document.getElementById('q2').innerHTML = sum
+        document.getElementById('q2').innerHTML = sum1;
         }
     </script>
     <br>
 
-    <h3>Q3.증가/감소/종료</h3>
-
+    <h3>Q3. 증가/감소/종료</h3>
     <button onclick="testWhile()">시작</button>
     <script>
         function testWhile() {
             let data;
-            let sum1;
-            while (true) {
+            let sum2 = 0;
+            while(true) {
                 data = window.prompt('증가 - 1, 감소 - 2, 종료 - 3를 선택해주세요.');
-                if (isNaN(data) != true) {
-                    alert('카운트 : ' + sum);
-                } else if (data == 3) {
+                
+                if(data == '1') {
+                    sum2 += 1;
+                    alert('카운트 : ' + sum2);
+                } else if (data == '2') {
+                    sum2 -= 1;
+                    alert('카운트 : ' + sum2);
+                } else if (data == '3') {
                     break;
-                    alert('현재까지 카운트 : ' + sum);
+                    alert('현재까지 카운트 : ' + sum2);
                 } else {
-                    sum += Number(data);
-                    alert('카운트 : ' + sum);
+                    alert('카운트 : ' + sum2 + '\n' + '1, 2, 3 중에 입력하세요.');
                 }
             }
         }
     </script>
+    <br>
 
+    <h3>Q4. Date 이용하기</h3>
+    <div id="generation"></div>
+    <span class="month"></span> >> <span id="day"></span><br>
+    <span class="month"></span> >> <span id="lastDay_of_month"></span>
+    <script>
+        let dateInfo = new Date();
+
+        if (dateInfo.getFullYear() >= 2000) {
+            document.getElementById('generation').innerHTML = '밀레니엄 세대시군요 !'
+        } else {
+            document.getElementById('generation').innerHTML = '밀레니엄 세대가 아니시군요 ㅠ'
+        }
+
+        let array1 = document.getElementsByClassName('month');
+        for(let i=0; i<array1.length;i++) {
+            array1[i].innerHTML = dateInfo.getMonth() + 1;
+        }
+
+        if (dateInfo.getDay() >= 5) {
+            document.getElementById('day').innerHTML = '쉬~~~~~자';
+        } else {
+            document.getElementById('day').innerHTML = '열~~~심히 공부하자';
+        }
+
+        let lastday = new Date(dateInfo.getFullYear(), dateInfo.getMonth()+1, 0);
+        document.getElementById('lastDay_of_month').innerHTML = lastday.getDate() + '일까지'
+    </script>
 </body>
 </html>

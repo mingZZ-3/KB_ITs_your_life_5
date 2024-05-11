@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 좌석</title>
+    <link rel="stylesheet" href="movie_css.css">
+    <script src="movie_js.js"></script>
+</head>
+<body>
+    <div id="seatContainer">
+        <div class="row">
+            <span class="seat" onclick="seatNumber(1)">1</span>
+            <span class="seat" onclick="seatNumber(2)">2</span>
+            <span class="seat" onclick="seatNumber(3)">3</span>
+            <span class="seat" onclick="seatNumber(4)">4</span>
+            <span class="seat" onclick="seatNumber(5)">5</span>
+            <span class="seat" onclick="seatNumber(6)">6</span>
+            <span class="seat" onclick="seatNumber(7)">7</span>
+            <span class="seat" onclick="seatNumber(8)">8</span>
+        </div>
+
+        <div class="row">
+            <span class="seat" onclick="seatNumber(9)">9</span>
+            <span class="seat" onclick="seatNumber(10)">10</span>
+            <span class="seat" onclick="seatNumber(11)">11</span>
+            <span class="seat" onclick="seatNumber(12)">12</span>
+            <span class="seat" onclick="seatNumber(13)">13</span>
+            <span class="occupiedSeat" onclick="noticeSelected()">14</span>
+            <span class="seat" onclick="seatNumber(15)">15</span>
+            <span class="seat" onclick="seatNumber(16)">16</span>
+        </div>
+
+        <div class="row">
+            <span class="seat" onclick="seatNumber(17)">17</span>
+            <span class="seat" onclick="seatNumber(18)">18</span>
+            <span class="seat" onclick="seatNumber(19)">19</span>
+            <span class="seat" onclick="seatNumber(20)">20</span>
+            <span class="seat" onclick="seatNumber(21)">21</span>
+            <span class="seat" onclick="seatNumber(22)">22</span>
+            <span class="occupiedSeat" onclick="noticeSelected()">23</span>
+            <span class="seat" onclick="seatNumber(24)">24</span>
+        </div>
+
+        <div class="row">
+            <span class="seat" onclick="seatNumber(25)">25</span>
+            <span class="seat" onclick="seatNumber(26)">26</span>
+            <span class="seat" onclick="seatNumber(27)">27</span>
+            <span class="seat" onclick="seatNumber(28)">28</span>
+            <span class="seat" onclick="seatNumber(29)">29</span>
+            <span class="seat" onclick="seatNumber(30)">30</span>
+            <span class="occupiedSeat" onclick="noticeSelected()">31</span>
+            <span class="seat" onclick="seatNumber(32)">32</span>
+        </div>
+
+        <div class="row">
+            <span class="seat" onclick="seatNumber(33)">33</span>
+            <span class="seat" onclick="seatNumber(34)">34</span>
+            <span class="seat" onclick="seatNumber(35)">35</span>
+            <span class="seat" onclick="seatNumber(36)">36</span>
+            <span class="seat" onclick="seatNumber(37)">37</span>
+            <span class="seat" onclick="seatNumber(38)">38</span>
+            <span class="seat" onclick="seatNumber(39)">39</span>
+            <span class="seat" onclick="seatNumber(40)">40</span>
+        </div>
+    </div>
+
+    <div id="infoContainer">
+        <!-- 완료, 입력값들, 결제 금액 -->
+        <h2>영화 좌석 번호 입력</h2>
+        <div>회색 좌석 중 선택하거나, 번호를 입력해주세요</div><br>
+        <input type="text" id="inputValue" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
+        <button class='btn' onclick="addSeat()">입력</button> <button class='btn' onclick="clearSeats()">초기화</button>
+        <br><br>
+        <br><br>
+
+        * 선택된 좌석 :<span id="picked"></span><br>
+        * 총 금액 : <span id="total_price"></span> 원<br>
+        <button id="btn_done" class="btn" onclick="done()">완료</button>
+    </div>
+</body>
+</html>
