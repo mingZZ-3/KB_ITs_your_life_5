@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습1</title>
+</head>
+<body>
+    <style>
+        #login_layout{
+            display: flex;
+            justify-content: left;
+            gap: 10px;
+        }
+        #notice_id{
+            color: red;
+            font-size: 17pt;
+        }
+    </style>
+
+    <dv id="login_layout">
+        <div>
+            아이디 : <input type="text" id="inputValue1"><br>
+            <div id="notice_id"></div>
+        </div>
+        <button onclick="checkID()">아이디 체크</button>
+    </dv>
+    <script>
+        function checkID() {
+            let txt_id = document.getElementById('inputValue1').value;
+            if(txt_id == 'root') {
+                document.getElementById('notice_id').innerHTML = '아이디 성공 !'
+            } else {
+                document.getElementById('notice_id').innerHTML = '다시 시도해주세요,,ㅠ'
+            }
+        }
+    </script>
+    <hr><br>
+
+    <div>
+        지식인 검색 : <input type="text" id="inputValue2"> <button onclick="search()">지식인 검색</button>
+    </div>
+    <script>
+        function search() {
+            let url = 'https://kin.naver.com/search/list.naver?query=' + document.getElementById('inputValue2').value;
+            window.open(url, 'naver search');
+        }
+    </script>
+    <hr><br>
+
+    <div>
+        웹툰 검색 : <input type="text" id="inputValue3"> <button onclick="findWebtoon()">웹툰 검색</button>
+    </div>
+    <script>
+        function findWebtoon() {
+            let url = 'https://comic.naver.com/search?keyword=' + document.getElementById('inputValue3').value;
+            window.open(url, 'naver search');
+        }
+    </script>
+</body>
+</html>

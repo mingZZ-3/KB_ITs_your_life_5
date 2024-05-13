@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습3</title>
+
+    <style>
+        body{
+            width: 400px;
+        }
+        hr{
+            background-color: red;
+            size: 3;
+        }
+        img{
+            width: 400px;
+        }
+        .btn{
+            padding-top: 5px;
+            border: 1px solid black;
+        }
+        #btn_layout{
+            text-align: center;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="btn_layout">
+        <div class="btn" id="btn_jeju" style="background-color: greenyellow;" onclick="changeImg(0)">제주도로</div>
+        <div class="btn" id="btn_japan" style="background-color: orange;" onclick="changeImg(1)">일본으로</div>
+        <div class="btn" id="btn_hawai" style="background-color: purple;" onclick="changeImg(2)">하와이로</div>
+    </div>
+    <hr>
+    <h3>힘들다!! 우리도 떠나자!!</h3>
+    <hr>
+    <div id="img_layout">
+        <img src="resource/cat.jpeg" id="img_source">
+    </div>
+
+    <script>
+        function changeImg(index) {
+            if(index == 0) {
+                document.getElementById('img_layout').innerHTML = '<img src="resource/cat.jpeg" id="img_source">';
+            } else if(index == 1) {
+                document.getElementById('img_layout').innerHTML = '<img src="resource/ooh_cat.jpeg" id="img_source">';
+            } else if(index == 2) {
+                document.getElementById('img_layout').innerHTML = '<img src="resource/run_cat.jpeg" id="img_source">';
+            } else {
+                document.getElementById('img_layout').innerHTML = '<img src="resource/cat.jpeg" id="img_source">';
+            }
+        }
+    </script>
+</body>
+</html>

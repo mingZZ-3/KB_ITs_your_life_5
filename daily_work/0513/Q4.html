@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습4</title>
+
+    <style>
+        hr{
+            background-color: red;
+            size: 3;
+        }
+        .input_layout{
+            background-color: yellow;
+            width: 150x;
+        }
+    </style>
+</head>
+<body>
+    구매상점 입력 : <input type="text" id="inputValue1" class="input_layout"><br><br>
+    결제금액 입력 : <input type="text" id="inputValue2" class="input_layout"><br>
+    <hr><br>
+    결제 수단 선택 : 
+    <select id="pay_method">
+        <option value="account" selected>계좌이체</option>
+        <option value="card">신용카드</option>
+        <option value="phone">휴대폰 결제</option>
+    </select>
+    <hr><br>
+    <button onclick="pay()">결제금액 계산</button><br>
+    <div id="result"></div>
+
+    <script>
+        function pay() {
+            let store = document.getElementById('inputValue1').value;
+            let price = document.getElementById('inputValue2').value;
+            let methd = document.getElementById('pay_method').value;
+            let str = store + '에서 최종 결제금액 : ';
+
+            if (methd == 'card') {
+                str += (Number(price) + 1000) + '원';
+            } else if (methd == 'account') {
+                str += price + '원';
+            } else if (methd == 'phone') {
+                str += (Number(price) + 500) + '원';
+            }
+
+            document.getElementById('result').innerHTML = str;
+        }
+    </script>
+</body>
+</html>

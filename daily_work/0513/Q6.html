@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습6</title>
+
+    <style>
+        body{
+            width: 500px;
+        }
+        .layout{
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+        .btn{
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border: 0px;
+        }
+        .input_layout{
+            width: 450px;
+            height: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .notice_layout{
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        ID 입력 :<br>
+        <input class="input_layout" type="text" id="inputValue1"><br>
+        <button onclick="checkId()" class="btn" style="background-color: orange;">회원가입시 ID 중복 체크</button><br>
+        <div class="notice_layout" id="notice_id" style="color: red;"></div>
+    </div>
+    <script>
+        let members = ['root', 'apple', 'admin'];
+
+        function checkId() {
+            let id_txt = document.getElementById('inputValue1').value;
+            if (members.includes(id_txt) == true) {
+                document.getElementById('notice_id').innerHTML = '이미 사용중인 ID 입니다. 다른 ID를 선택해주세요.'
+            } else {
+                document.getElementById('notice_id').innerHTML = '사용 가능한 ID 입니다.'
+            }
+        }
+    </script>
+
+    <div class="layout">
+        전화번호 입력 :<br>
+        <input class="input_layout" type="text" id="inputValue2"><br>
+        <button onclick="sendNum()" class="btn" style="background-color: aqua;">인증번호 받기</button><br>
+        <div class="notice_layout" id="notice_phone"></div>
+        <script>
+            function sendNum() {
+                let str = '인증번호 : ';
+                let num_txt = document.getElementById('inputValue2').value;
+
+                if (num_txt.startsWith('010') == true) {
+                    document.getElementById('notice_phone').innerHTML = str + '01' + random();
+                } else if (num_txt.startsWith('011') == true) {
+                    document.getElementById('notice_phone').innerHTML = str + '02' + random();
+                } else {
+                    document.getElementById('notice_phone').innerHTML = str + '03' + random();
+                }
+            }
+
+            function random() {
+                return Math.floor(( Math.random() * ( 999 - 100 )) + 100);
+            }
+        </script>
+    </div>
+</body>
+</html>

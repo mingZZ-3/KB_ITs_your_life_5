@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습2</title>
+</head>
+<body>
+    아이디 입력 : <input type="text" id="inputValue1"> <button onclick="checkId()">아이디 확인</button>
+    <br><hr>
+    패스워드 : <input type="password" id="inputValue2"><br>
+    패스워드 확인 : <input type="password" id="inputValue3"><br>
+    <button onclick="checkPwd()">확인</button><br>
+    <div id="result_layout">
+        
+    </div>
+
+    <script>
+        function checkId() {
+            let id_txt = document.getElementById('inputValue1').value;
+            if(id_txt.length < 5) {
+                alert('5미만 입니다. 다시 입력해줏요.');
+            } else {
+                alert('완료');
+            }
+        }
+
+        function checkPwd() {
+            let pwd1 = document.getElementById('inputValue2').value;
+            let pwd2 = document.getElementById('inputValue3').value;
+
+            if(pwd1 == pwd2) {
+                document.getElementById('result_layout').innerHTML = '<span style="color: red; font-size: 17pt;">일치!!</span><img src="resource/correct.png">';
+            } else {
+                document.getElementById('result_layout').innerHTML = '<span style="color: blue; font-size: 17pt;">불일치!!</span><img src="resource/wrong.png">'
+            }
+        }
+    </script>
+</body>
+</html>
