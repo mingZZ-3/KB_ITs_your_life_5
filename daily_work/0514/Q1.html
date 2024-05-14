@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습1</title>
+</head>
+<body>
+    <script>
+        function addContact(name, phone, home = "없음", address="없음", email="없음", ...favoriteFoods) {
+            document.write(`name >> ${name}<br>`);
+            document.write(`phone >> ${phone}<br>`);
+            document.write(`home >> ${home}<br>`);
+            document.write(`address >> ${address}<br>`);
+            document.write(`email >> ${email}<br>`);
+            document.write(`favoriteFoods >> ${favoriteFoods}<br>`);
+            document.write('-----------------------<br>')
+        }
+        addContact("홍길동", "010-222-3331");
+        addContact("홍길동", "010-222-3331", "02-3422-9900", "서울시");
+        addContact("홍길동", "010-222-3331", "02-3422-9900", "서울시", "Hero@email.com", "감자", "고구마");
+    </script>
+</body>
+</html>

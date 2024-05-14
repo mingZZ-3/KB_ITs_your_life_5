@@ -23,7 +23,7 @@
     <b>input(입력창) 태그관련 이벤트</b><br>
     focus : input태그에 focus되었을때 발생 * 주의 blur가 같이 처리됨 -> 무한루프가 됨<br>
     blur : input태그의 focus가 사라졌을때 발생<br>
-    change : input태그의 value속성의 값이 변경됐을때 발생 * select태그 이벤트에 많이 사용<br>
+    change : input태그의 value속성의 값이 변경됐을때 발생 *select태그 이벤트에 많이 사용<br>
     submit : form태그에서 submit타입을 클릭했을때 발생 form태그로 데이터전송시 발생<br>
     reset : form태그에서 reset타입을 클릭했을때 발생<br>
     <hr><br>
@@ -42,7 +42,7 @@
     <hr><br>
 
     <b>윈도우창 관련 이벤트</b><br>
-    load : 페이지의 태그들이 다 로드됐을때 발생 * 페이지관련 이벤트<br>
+    load : 페이지의 태그들이 다 로드됐을때 발생 *페이지관련 이벤트<br>
     resize : 윈도우 크기가 조정됐을때 발생<br>
     scroll : 창에서 스크롤이 조정됐을때 발생<br>
     <hr><br>
@@ -103,8 +103,8 @@
     
     <!-- https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener -->
     <h3>3. 표준 이벤트 모델</h3>
-    <p> - w3c에서 지정한 표준적인 이벤트 등록방식</p>
-    <p> - 여러개의 이벤트를 등록할수 있다. (강사는 비추함)</p>
+     - w3c에서 지정한 표준적인 이벤트 등록방식<br>
+     - 여러개의 이벤트를 등록할수 있다. (가급적 적게 등록하는 것을 권장) <br>
     <button id="btn5">버튼5</button>
     <button id="btn6">버튼6</button>
     <div id="div3"></div>
@@ -130,12 +130,39 @@
     </script>
     <hr><br>
 
+    <!-- https://ko.javascript.info/bubbling-and-capturing 참고 -->
+    <h3>버블링(bubbling) 이슈</h3>
+    - element를 겹쳐서 구성하는 경우 자식-부모(조상) 간에 이벤트가 전파 되는 현상 <br>  
+    - 일반적으로 버블링은 자연스러운 현상으로 기능상 문제가 되지 않는한 신경쓰지 않아도 된다.<br>
+    - 만일 문제가 되는 경우 event.stopPropagation()을 활용하여 전파를 막는다. <br><br>
+    
+    <style>
+        form, form * {
+            margin: 10px;
+            border: 1px solid blue;
+        }
+    </style>
 
-    <h4>버블링</h4>
-    <div onclick="alert('div에 할당한 핸들러!')">
-    <em><code>EM</code>을 클릭했는데도 <code>DIV</code>에 할당한 핸들러가 동작합니다.</em>
-    </div>
-
+    <h3>버블링 발생 영역</h3>
+    <form onclick="alert('form');">FORM
+        <h3 onclick="alert('h3');">H3
+            <p onclick="alert('p');">P</p>
+        </h3>
+    </form>
+    <hr><br>
+    
+    <h3>버블링 해결 방법 - event.stopPropagation() 활용</h3>
+    <form onclick="alert('form')">FORM
+        <h3 onclick="onClick1(event);">H3
+            <p onclick="alert('p');">P</p>
+        </h3>
+    </form>
+    <script>
+        function onClick1(event){
+            alert('h3, form으로는 전달되지 않는다.');
+            event.stopPropagation(); // 이후(form)로는 이벤트가 전파되지 않는다. 
+        }
+    </script>
 
     <br><br><br><br><br><br><br><br><br><br><br>
 

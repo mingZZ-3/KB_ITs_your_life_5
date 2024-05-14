@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습5</title>
+</head>
+<body>
+    <script>
+        let discount = () => {
+            document.write(`할인을 하는 중입니다.<br>`);
+        }
+
+        discount();
+
+        let product = {
+            name : '에너자이자',
+            total_price : 5000,
+            discount_price : 4700,
+            one_price : 2350,
+            arrive_date : '내일 (수) 도착 보장',
+            rate : 50,
+            stack_money : 188,
+            print : function() {
+                document.write(`name >> ${this.name}<br>`);
+                document.write(`total_price >> ${this.total_price}<br>`);
+                document.write(`discount_price >> ${this.discount_price}<br>`);
+                document.write(`one_price >> ${this.one_price}<br>`);
+                document.write(`arrive_date >> ${this.arrive_date}<br>`);
+                document.write(`rate >> ${this.rate}<br>`);
+                document.write(`stack_money >> ${this.stack_money}<br>`);
+            }
+        }
+
+        product.print()
+    </script>
+</body>
+</html>

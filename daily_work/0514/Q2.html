@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습2</title>
+</head>
+<body>
+    <script>
+        function addContact3(name, phone, email="이메일 없음", age = 0) {
+            document.write(`name >> ${name}<br>`);
+            document.write(`phone >> ${phone}<br>`);
+            document.write(`email >> ${email}<br>`);
+            document.write(`age >> ${age + 1}<br>`);
+            document.write('-----------------------<br>')
+            
+            return {cname: name, cphone: phone, cemail: email, cage: age};
+        }
+
+        let {cname, cphone, cemail, cage} = addContact3("지수", "010-222-3333",  "hera", 100);
+        document.write(`cname >> ${cname}<br>`);
+        document.write(`cphone >> SKT ${cphone}<br>`);
+        document.write(`cemail >> ${cemail}@email.com<br>`);
+        document.write(`cage >> ${cage + 1}<br>`);
+    </script>
+</body>
+</html>

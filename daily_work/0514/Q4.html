@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습4</title>
+</head>
+<body>
+    <script>
+        // 방법 1
+        let obj1 = { result : 0 };
+        obj1.add = function(x, y) {
+            function inner() {
+                this.result = x + y;
+            }
+            inner = inner.bind(this);
+            inner();
+        }
+        obj1.add(3,4)
+
+        console.log(obj1);
+
+        // 방법 2
+        let obj2 = { result : 0 };
+        obj2.add = function(x, y) {
+            const inner = () => {
+                this.result = x + y;
+            }
+            inner();
+        }
+        obj2.add(3,4)
+
+        console.log(obj2);
+    </script>
+</body>
+</html>
