@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습1</title>
+</head>
+<body>
+    <script>
+        const promise = new Promise((resolve, reject) => {
+            document.write('Promise를 시작합니다.<br>');
+            resolve();
+        })
+
+        promise.then(() => {
+            document.write('1 ==> 너의 이름은?<br>')
+            return '홍길동';
+        }).then((msg) => {
+            document.write('2 ==> ' + msg + '<br>');
+            document.write('네가 가고 싶은 곳은?<br>')
+            return '홍길동은 일본';
+        }).then((msg) => {
+            document.write('3 ==> ' + msg + '<br>');
+            document.write(msg + '을 가기를 희망한다.');
+        })
+    </script>
+</body>
+</html>

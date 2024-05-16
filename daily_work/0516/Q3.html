@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습3</title>
+</head>
+<body>
+    <script>
+        let obj1 = {naem : '박문수', age : 29};
+        let obj2 = {...obj1, email : 'winner@email.com'};
+        
+        const handler = {
+            get(obj, prop) {
+                return `${prop} : ${obj[prop]}`;
+            },
+            set(obj, prop, value) {
+                obj[prop] = value;
+            }
+        }
+
+        const proxy1 = new Proxy(obj1, handler)
+        const proxy2 = new Proxy(obj2, handler)
+        document.write('obj1>> { ' + proxy1.naem + ', ' + proxy1.age + ' }<br>');
+        document.write('obj1>> { ' + proxy2.naem + ', ' + proxy2.age + ', ' + proxy2.email + ' }<br>');
+        document.write('--------<br>')
+
+        proxy2.age = 100;
+        document.write('obj1>> { ' + proxy1.naem + ', ' + proxy1.age + ' }<br>');
+        document.write('obj1>> { ' + proxy2.naem + ', ' + proxy2.age + ', ' + proxy2.email + ' }<br>');
+
+        document.write(obj1 === obj2);
+    </script>
+</body>
+</html>

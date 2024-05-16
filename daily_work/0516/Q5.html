@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습5</title>
+</head>
+<body>
+    <script>
+        let nums = [];
+
+        function random() {
+            let tmp = Math.floor(( Math.random() * ( 45 - 1 )) + 1);
+            
+            if (nums.includes(tmp) == true) {
+                random()
+            } else {
+                nums.push(tmp);
+            }
+        }
+
+        function print() {
+            let txt = '';
+            nums.forEach((value) => {
+                txt += value + ', '
+            })
+
+            document.write(`복권번호 : [ ${txt}]`)
+        }
+
+        async function makeNums() {
+            await random();
+            await random();
+            await random();
+            await random();
+            await random();
+            await random();
+            await print();
+        }
+
+        makeNums();
+    </script>
+</body>
+</html>

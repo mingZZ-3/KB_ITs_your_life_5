@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습2</title>
+</head>
+<body>
+    <script>
+        function random() {
+                return Math.floor(( Math.random() * ( 100 - 1 )) + 1);
+        }
+
+        const promise = new Promise((resolve, rejet) => {
+            document.write('Promise를 시작합니다.<br>');
+            resolve();
+        })
+
+        promise.then(() => {
+            document.write('1 ==> 두 수를 랜덤하게 생성하여 더한 후 리턴?<br>')
+            return random();
+        }).then((num) => {
+            document.write('2 ==> ' + num + '<br>');
+            document.write('두 수를 랜덤하게 생성하여 곱한 값을 리턴<br>');
+            return [random(), random()];
+        }).then((nums) => {
+            document.write('3 ==> ' + nums[0] + ', ' + nums[1] + '<br>');
+            document.write('두 수의 합은 ' + (nums[0] + nums[1]) + '<br>');
+            document.write('두 수의 곱은 ' + (nums[0] * nums[1]) + '<br>');
+        })
+    </script>
+</body>
+</html>
