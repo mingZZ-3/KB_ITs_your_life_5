@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap {
+            position: absolute;
+            left: 0;
+            bottom: -40px;
+            width: 288px;
+            height: 132px;
+            margin-left: -68px;
+            text-align: left;
+            overflow: hidden;
+            font-size: 12px;
+            font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+            line-height: 1.5;
+        }
+
+        .wrap * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrap .info {
+            width: 286px;
+            height: 120px;
+            border-radius: 5px;
+            border-bottom: 2px solid #ccc;
+            border-right: 1px solid #ccc;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .wrap .info:nth-child(1) {
+            border: 0;
+            box-shadow: 0px 1px 2px #888;
+        }
+
+        .info .title {
+            padding: 5px 0 0 10px;
+            height: 30px;
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .info .body {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info .desc {
+            position: relative;
+            margin: 13px 0 0 90px;
+            height: 75px;
+        }
+
+        .desc .ellipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .desc .jibun {
+            font-size: 11px;
+            color: #888;
+            margin-top: -2px;
+        }
+
+        .info .img {
+            position: absolute;
+            top: 6px;
+            left: 5px;
+            width: 73px;
+            height: 71px;
+            border: 1px solid #ddd;
+            color: #888;
+            overflow: hidden;
+        }
+
+        .info:after {
+            content: '';
+            position: absolute;
+            margin-left: -12px;
+            left: 50%;
+            bottom: 0;
+            width: 22px;
+            height: 12px;
+            background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+        }
+
+        .info .link {
+            color: #5085BB;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>맛집 지도</h2>
+    <br>
+    <div> - 등록된 주변 맛있는 맛집들 정보를 확인해요</div>
+    <div> - 가까이 마우스를 올리면 자세한 정보를 볼 수 있어요</div>
+    <div> - 선택한 위치로부터 반경을 검색해서 이동시간 등을 확인해요</div>
+    <div> - 지도의 크기를 조절해요</div>
+    <hr><br>
+
+    <section id="container">
+        <div id="map" style="width:100%;height:400px;"></div>
+    </section>
+
+    <p>
+        <button onclick="zoomIn()">지도레벨 - 1</button>
+        <button onclick="zoomOut()">지도레벨 + 1</button>
+        <span id="maplevel"></span>
+    </p>
+
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee850f3227ff38fdb5e4924011797d01"></script>
+    <script>
+        var positions = [
+            {
+                name: '몽글몽글',
+                address: '서울 광진구 광나루로20길 23 광진스위트룸 상가 1층',
+                desc: '두부 맛집',
+                rate: 4.5,
+                url: 'https://naver.me/5ipPHfLP',
+                lat: 37.5458326,
+                lng: 127.0745268,
+                img_url: 'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230911_67%2F16944319600131NjBY_JPEG%2F1690586674740.jpg',
+            },
+            {
+                name: '혼다라멘',
+                address: '서울 광진구 광나루로 385 1층1호',
+                desc: '일본라면',
+                rate: 4.0,
+                url: 'https://naver.me/FDQn4Aya',
+                lat: 37.5480982,
+                lng: 127.0726594,
+                img_url: 'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20190101_43%2F1546338965516em0Y9_JPEG%2FX4-1SOOKS0Gb9oHbj7MhtT_h.jpg',
+            },
+            {
+                name: '시홍쓰',
+                address: '서울 광진구 능동로17길 5 1층',
+                desc: '랩을한다 홍홍홍',
+                rate: 5.0,
+                url: 'https://naver.me/x9JcNGds',
+                lat: 37.5460588,
+                lng: 127.0730113,
+                img_url: 'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220712_282%2F16576252274583ilfO_JPEG%2F2AA67F98-63C8-482B-A6B3-7E3DAD363062.jpeg',
+            },
+            {
+                name: '춘리 마라탕',
+                address: '서울 광진구 광나루로 374 2층 201호',
+                desc: '마라탕 맛집',
+                rate: 5.0,
+                url: 'https://naver.me/5Qu5hL57',
+                lat: 37.5477001,
+                lng: 127.0714694,
+                img_url: 'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231227_290%2F1703656893365lgVVl_JPEG%2FKakaoTalk_20230329_170349390.jpg',
+            },
+            {
+                name: '레빗홀버거',
+                address: '서울 광진구 광나루로 424 1층',
+                desc: '햄버거 맛집',
+                rate: 5.0,
+                url: 'https://naver.me/5Qu5hL57',
+                lat: 37.5460129,
+                lng: 127.076516,
+                img_url: 'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210414_271%2F1618355081885xjodu_JPEG%2FBhJRNdYAPlFoY2sj2ZKEzAfs.jpeg.jpg',
+            }
+        ];
+
+        var latSum = 0, latAvg = 0.0;
+        var lngSum = 0, lngAvg = 0.0;
+
+        positions.forEach((obj) => {
+            latSum += obj.lat;
+            lngSum += obj.lng;
+        });
+        latAvg = latSum / positions.length;
+        lngAvg = lngSum / positions.length;
+        var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+        var mapOption = {
+            center: new kakao.maps.LatLng(latAvg, lngAvg), // 지도의 중심좌표
+            level: 4 // 지도의 확대 레벨
+        };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 
+        var imageSrc = `./ping.jpeg`, // 마커이미지의 주소입니다    
+            imageSize = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
+            imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+            markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+        //
+
+        var drawingFlag = false; // 원이 그려지고 있는 상태를 가지고 있을 변수입니다
+        var centerPosition; // 원의 중심좌표 입니다
+        var drawingCircle; // 그려지고 있는 원을 표시할 원 객체입니다
+        var drawingLine; // 그려지고 있는 원의 반지름을 표시할 선 객체입니다
+        var drawingOverlay; // 그려지고 있는 원의 반경을 표시할 커스텀오버레이 입니다
+        var drawingDot; // 그려지고 있는 원의 중심점을 표시할 커스텀오버레이 입니다
+
+        var circles = []; // 클릭으로 그려진 원과 반경 정보를 표시하는 선과 커스텀오버레이를 가지고 있을 배열입니다
+
+
+        positions.forEach((obj) => {
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                map: map, // 마커를 표시할 지도
+                position: new kakao.maps.LatLng(obj.lat, obj.lng), // 마커의 위치
+                image: markerImage
+            });
+            var contentHtml = `<div class="wrap">
+                <div class="info">
+                    <div class="title">
+                        ${obj.name}
+                    </div>
+                    <div class="body">
+                        <div class="img">
+                            <img src=${obj.img_url} width="73" height="70">
+                       </div>
+                        <div class="desc">
+                            <div class="ellipsis">${obj.address}</div>
+                            <div class="jibun ellipsis">별점: ${obj.rate}</div>
+                            <div class="jibun ellipsis">${obj.desc}</div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            obj.content = contentHtml;
+            // 마커에 표시할 인포윈도우를 생성합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: obj.content // 인포윈도우에 표시할 내용
+            });
+            // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+            // 이벤트 리스너로는 클로저를 만들어 등록합니다
+            // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow, obj));
+            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+        });
+        // 클릭 이벤트를 만드는 클로저 함수입니다.
+        function makeClickListener(map, marker, infowindow, obj) {
+            return function () {
+                location = obj.url;
+            };
+        }
+        // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+        function makeOverListener(map, marker, infowindow) {
+            return function () {
+                infowindow.open(map, marker);
+            };
+        }
+        // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+        function makeOutListener(infowindow) {
+            return function () {
+                infowindow.close();
+            };
+        }
+
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+        // 지도에 클릭 이벤트를 등록합니다
+        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+
+            // 클릭 이벤트가 발생했을 때 원을 그리고 있는 상태가 아니면 중심좌표를 클릭한 지점으로 설정합니다
+            if (!drawingFlag) {
+
+                // 상태를 그리고있는 상태로 변경합니다
+                drawingFlag = true;
+
+                // 원이 그려질 중심좌표를 클릭한 위치로 설정합니다 
+                centerPosition = mouseEvent.latLng;
+
+                // 그려지고 있는 원의 반경을 표시할 선 객체를 생성합니다
+                if (!drawingLine) {
+                    drawingLine = new kakao.maps.Polyline({
+                        strokeWeight: 3, // 선의 두께입니다
+                        strokeColor: '#00a0e9', // 선의 색깔입니다
+                        strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                        strokeStyle: 'solid' // 선의 스타일입니다
+                    });
+                }
+
+                // 그려지고 있는 원을 표시할 원 객체를 생성합니다
+                if (!drawingCircle) {
+                    drawingCircle = new kakao.maps.Circle({
+                        strokeWeight: 1, // 선의 두께입니다
+                        strokeColor: '#00a0e9', // 선의 색깔입니다
+                        strokeOpacity: 0.1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                        strokeStyle: 'solid', // 선의 스타일입니다
+                        fillColor: '#00a0e9', // 채우기 색깔입니다
+                        fillOpacity: 0.2 // 채우기 불투명도입니다 
+                    });
+                }
+
+                // 그려지고 있는 원의 반경 정보를 표시할 커스텀오버레이를 생성합니다
+                if (!drawingOverlay) {
+                    drawingOverlay = new kakao.maps.CustomOverlay({
+                        xAnchor: 0,
+                        yAnchor: 0,
+                        zIndex: 1
+                    });
+                }
+            }
+        });
+
+        // 지도에 마우스무브 이벤트를 등록합니다
+        // 원을 그리고있는 상태에서 마우스무브 이벤트가 발생하면 그려질 원의 위치와 반경정보를 동적으로 보여주도록 합니다
+        kakao.maps.event.addListener(map, 'mousemove', function (mouseEvent) {
+
+            // 마우스무브 이벤트가 발생했을 때 원을 그리고있는 상태이면
+            if (drawingFlag) {
+
+                // 마우스 커서의 현재 위치를 얻어옵니다 
+                var mousePosition = mouseEvent.latLng;
+
+                // 그려지고 있는 선을 표시할 좌표 배열입니다. 클릭한 중심좌표와 마우스커서의 위치로 설정합니다
+                var linePath = [centerPosition, mousePosition];
+
+                // 그려지고 있는 선을 표시할 선 객체에 좌표 배열을 설정합니다
+                drawingLine.setPath(linePath);
+
+                // 원의 반지름을 선 객체를 이용해서 얻어옵니다 
+                var length = drawingLine.getLength();
+
+                if (length > 0) {
+
+                    // 그려지고 있는 원의 중심좌표와 반지름입니다
+                    var circleOptions = {
+                        center: centerPosition,
+                        radius: length,
+                    };
+
+                    // 그려지고 있는 원의 옵션을 설정합니다
+                    drawingCircle.setOptions(circleOptions);
+
+                    // 반경 정보를 표시할 커스텀오버레이의 내용입니다
+                    var radius = Math.round(drawingCircle.getRadius()),
+                        content = '<div class="info">반경 <span class="number">' + radius + '</span>m</div>';
+
+                    // 반경 정보를 표시할 커스텀 오버레이의 좌표를 마우스커서 위치로 설정합니다
+                    drawingOverlay.setPosition(mousePosition);
+
+                    // 반경 정보를 표시할 커스텀 오버레이의 표시할 내용을 설정합니다
+                    drawingOverlay.setContent(content);
+
+                    // 그려지고 있는 원을 지도에 표시합니다
+                    drawingCircle.setMap(map);
+
+                    // 그려지고 있는 선을 지도에 표시합니다
+                    drawingLine.setMap(map);
+
+                    // 그려지고 있는 원의 반경정보 커스텀 오버레이를 지도에 표시합니다
+                    drawingOverlay.setMap(map);
+
+                } else {
+
+                    drawingCircle.setMap(null);
+                    drawingLine.setMap(null);
+                    drawingOverlay.setMap(null);
+
+                }
+            }
+        });
+
+        // 지도에 마우스 오른쪽 클릭이벤트를 등록합니다
+        // 원을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면
+        // 마우스 오른쪽 클릭한 위치를 기준으로 원과 원의 반경정보를 표시하는 선과 커스텀 오버레이를 표시하고 그리기를 종료합니다
+        kakao.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
+
+            if (drawingFlag) {
+
+                // 마우스로 오른쪽 클릭한 위치입니다 
+                var rClickPosition = mouseEvent.latLng;
+
+                // 원의 반경을 표시할 선 객체를 생성합니다
+                var polyline = new kakao.maps.Polyline({
+                    path: [centerPosition, rClickPosition], // 선을 구성하는 좌표 배열입니다. 원의 중심좌표와 클릭한 위치로 설정합니다
+                    strokeWeight: 3, // 선의 두께 입니다
+                    strokeColor: '#00a0e9', // 선의 색깔입니다
+                    strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                    strokeStyle: 'solid' // 선의 스타일입니다
+                });
+
+                // 원 객체를 생성합니다
+                var circle = new kakao.maps.Circle({
+                    center: centerPosition, // 원의 중심좌표입니다
+                    radius: polyline.getLength(), // 원의 반지름입니다 m 단위 이며 선 객체를 이용해서 얻어옵니다
+                    strokeWeight: 1, // 선의 두께입니다
+                    strokeColor: '#00a0e9', // 선의 색깔입니다
+                    strokeOpacity: 0.1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                    strokeStyle: 'solid', // 선의 스타일입니다
+                    fillColor: '#00a0e9', // 채우기 색깔입니다
+                    fillOpacity: 0.2  // 채우기 불투명도입니다 
+                });
+
+                var radius = Math.round(circle.getRadius()), // 원의 반경 정보를 얻어옵니다
+                    content = getTimeHTML(radius); // 커스텀 오버레이에 표시할 반경 정보입니다
+
+
+                // 반경정보를 표시할 커스텀 오버레이를 생성합니다
+                var radiusOverlay = new kakao.maps.CustomOverlay({
+                    content: content, // 표시할 내용입니다
+                    position: rClickPosition, // 표시할 위치입니다. 클릭한 위치로 설정합니다
+                    xAnchor: 0,
+                    yAnchor: 0,
+                    zIndex: 1
+                });
+
+                // 원을 지도에 표시합니다
+                circle.setMap(map);
+
+                // 선을 지도에 표시합니다
+                polyline.setMap(map);
+
+                // 반경 정보 커스텀 오버레이를 지도에 표시합니다
+                radiusOverlay.setMap(map);
+
+                // 배열에 담을 객체입니다. 원, 선, 커스텀오버레이 객체를 가지고 있습니다
+                var radiusObj = {
+                    'polyline': polyline,
+                    'circle': circle,
+                    'overlay': radiusOverlay
+                };
+
+                // 배열에 추가합니다
+                // 이 배열을 이용해서 "모두 지우기" 버튼을 클릭했을 때 지도에 그려진 원, 선, 커스텀오버레이들을 지웁니다
+                circles.push(radiusObj);
+
+                // 그리기 상태를 그리고 있지 않는 상태로 바꿉니다
+                drawingFlag = false;
+
+                // 중심 좌표를 초기화 합니다  
+                centerPosition = null;
+
+                // 그려지고 있는 원, 선, 커스텀오버레이를 지도에서 제거합니다
+                drawingCircle.setMap(null);
+                drawingLine.setMap(null);
+                drawingOverlay.setMap(null);
+            }
+        });
+
+        // 지도에 표시되어 있는 모든 원과 반경정보를 표시하는 선, 커스텀 오버레이를 지도에서 제거합니다
+        function removeCircles() {
+            for (var i = 0; i < circles.length; i++) {
+                circles[i].circle.setMap(null);
+                circles[i].polyline.setMap(null);
+                circles[i].overlay.setMap(null);
+            }
+            circles = [];
+        }
+
+        // 마우스 우클릭 하여 원 그리기가 종료됐을 때 호출하여 
+        // 그려진 원의 반경 정보와 반경에 대한 도보, 자전거 시간을 계산하여
+        // HTML Content를 만들어 리턴하는 함수입니다
+        function getTimeHTML(distance) {
+
+            // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
+            var walkkTime = distance / 67 | 0;
+            var walkHour = '', walkMin = '';
+
+            // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
+            if (walkkTime > 60) {
+                walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+            }
+            walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+
+            // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+            var bycicleTime = distance / 227 | 0;
+            var bycicleHour = '', bycicleMin = '';
+
+            // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+            if (bycicleTime > 60) {
+                bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+            }
+            bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+
+            // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
+            var content = '<ul class="info">';
+            content += '    <li>';
+            content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+            content += '    </li>';
+            content += '    <li>';
+            content += '        <span class="label">도보</span>' + walkHour + walkMin;
+            content += '    </li>';
+            content += '    <li>';
+            content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
+            content += '    </li>';
+            content += '</ul>'
+
+            return content;
+        }
+
+        // 지도 레벨을 표시합니다
+        displayLevel();
+
+        // 지도 레벨은 지도의 확대 수준을 의미합니다
+        // 지도 레벨은 1부터 14레벨이 있으며 숫자가 작을수록 지도 확대 수준이 높습니다
+        function zoomIn() {
+            // 현재 지도의 레벨을 얻어옵니다
+            var level = map.getLevel();
+
+            // 지도를 1레벨 내립니다 (지도가 확대됩니다)
+            map.setLevel(level - 1);
+
+            // 지도 레벨을 표시합니다
+            displayLevel();
+        }
+
+        function zoomOut() {
+            // 현재 지도의 레벨을 얻어옵니다
+            var level = map.getLevel();
+
+            // 지도를 1레벨 올립니다 (지도가 축소됩니다)
+            map.setLevel(level + 1);
+
+            // 지도 레벨을 표시합니다
+            displayLevel();
+        }
+
+        function displayLevel() {
+            var levelEl = document.getElementById('maplevel');
+            levelEl.innerHTML = '현재 지도 레벨은 ' + map.getLevel() + ' 레벨 입니다.';
+        }
+    </script>
+
+</body>
+
+</html>
