@@ -1,4 +1,5 @@
-const readline = require('readline');
+import readline from 'readline';
+import fs from 'fs';
 
 const rl = readline.createInterface({
     input: process.stdin, // 표준 입력 스트림 사용
@@ -14,4 +15,10 @@ const ask_movie = () => {
     });
 }
 
-module.exports = ask_movie;
+async function makeMovieFile() {
+    const movie = await ask_movie();
+    const path = 'movie.txt'
+    fs.writeFileSync(path, String(movie), {encoding : 'utf8'});
+}
+
+makeMovieFile();
