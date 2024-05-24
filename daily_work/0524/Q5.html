@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q5</title>
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        Start Value : <input type="text" v-model.number="startValue"><br>
+        End Value : <input type="text" v-model.number="endValue">
+        <hr>
+        Computed Sum : {{sum_computed}}<br>
+        Method Sum : {{sum_method()}}<br>
+        Watched Sum : {{sum_watch}}<br>
+    </div>
+
+    <script>
+        const vm = Vue.createApp({
+            name: 'app',
+            data() {
+                return {
+                    startValue : 0,
+                    endValue : 0,
+                    sum_watch : 0
+                };
+            },
+            computed : {
+                sum_computed() {
+                    console.log('sum_computed');
+                    sn = parseInt(this.startValue);
+                    en = parseInt(this.endValue);
+
+                    if (Number.isNaN(sn) || Number.isNaN(en))
+                        return 0;
+                    return sn + en;
+                },
+            },
+            methods: {
+                sum_method() {
+                    console.log('sum_method');
+                    sn = parseInt(this.startValue);
+                    en = parseInt(this.endValue);
+
+                    if (Number.isNaN(sn) || Number.isNaN(en))
+                        return 0;
+                    return sn + en;
+                }
+            },
+            watch: {
+                startValue(current, old) {
+                    console.log('sum_watch');
+                    var result = Number(current) + Number(this.endValue);
+                    if (isNaN(result))
+                        this.sum_watch = 0;
+                    else
+                        this.sum_watch = result;
+                },
+                endValue(current, old) {
+                    console.log('sum_watch');
+                    var result = Number(this.startValue) + Number(current);
+                    if (isNaN(result))
+                        this.sum_watch = 0;
+                    else
+                        this.sum_watch = result;
+                },
+
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
