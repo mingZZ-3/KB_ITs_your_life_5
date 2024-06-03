@@ -26,6 +26,7 @@
 
 <script>
 import CheckboxItem from './components/CheckboxItem.vue'
+
 export default {
   name: "App",
   components: {

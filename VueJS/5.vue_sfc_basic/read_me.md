@@ -14,8 +14,8 @@ npm install
 npm run dev
 
 2. vue-sfc-2
-npm create vite@latest vue-sfc-2-app
-cd vue-sfc-2-app
+npm create vite@latest vue-sfc-2-mitt
+cd vue-sfc-2-mitt
 npm i mitt@latest
 npm install
 npm run dev
@@ -27,9 +27,9 @@ npm i bootstrap@latest
 npm install
 npm run dev
 
-4. vue-sfc-4-todo2
-npm create vite@latest vue-sfc-4-todo2
-cd vue-sfc-4-todo2
+4. vue-sfc-4-todo-mitt
+npm create vite@latest vue-sfc-4-todo-mitt
+cd vue-sfc-4-todo-mitt
 npm i mitt@latest
 npm i bootstrap@latest
 npm install
